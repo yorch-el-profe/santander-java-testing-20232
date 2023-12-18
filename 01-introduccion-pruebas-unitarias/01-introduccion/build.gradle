@@ -1,0 +1,34 @@
+// Usamos este plugin para especificar que se trata de un proyecto de Java
+plugins {
+    id 'java'
+}
+
+// Se especifica la versión de Java, compatible con Gradle 9.0
+java {
+    sourceCompatibility = JavaVersion.VERSION_17;
+}
+
+// Grupo de todo el código
+group 'org.bedu.sesion01'
+
+// Siempre usaremos Maven Repository para obtener las dependencias
+repositories {
+    mavenCentral()
+}
+
+// Especificamos el uso de JUnit Platform al usar el comando "test"
+// Recordar que al final de la ejecución de las pruebas
+// se generará un reporte en la carpeta build/reports
+test {
+    useJUnitPlatform()
+}
+
+// JUnit + Jupiter: Biblioteca para crear pruebas unitarias (JUnit) y
+// anotaciones para facilitar su construcción (Jupiter)
+
+// JUnit Platform Launcher: Permite el auto-escaneo de pruebas y
+// la ejecución de las mismas.
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
