@@ -1,0 +1,41 @@
+// Usamos el plugin de application para correr el código
+plugins {
+    id 'application'
+}
+
+// Por lo tanto es necesario especificar cuál es la clase principal
+// es decir, la que contiene el método main
+application {
+    mainClass = "org.bedu.sesion01.Application"
+}
+
+// Permite utilizar Scanner con Gradle
+run {
+  standardInput = System.in
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17;
+}
+
+group 'org.bedu.sesion01'
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    // Usamos lombok para facilitar el desarrollo
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+	annotationProcessor 'org.projectlombok:lombok:1.18.30'
+	
+    // Es necesario también agregarlo para que sea detectado en las pruebas
+	testCompileOnly 'org.projectlombok:lombok:1.18.30'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
