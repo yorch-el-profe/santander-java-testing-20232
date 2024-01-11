@@ -8,9 +8,13 @@ import org.bedu.sesion03.model.Account;
 import org.bedu.sesion03.model.Card;
 import org.bedu.sesion03.repository.AccountRepository;
 
+import lombok.Getter;
+
 public class ATM {
 
+    @Getter
     private Card card;
+
     private Account account;
     private AccountRepository repository;
 
