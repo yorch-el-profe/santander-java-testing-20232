@@ -14,12 +14,16 @@ public class ATM {
 
     @Getter
     private Card card;
-
     private Account account;
+
     private AccountRepository repository;
 
     public ATM() {
         repository = new AccountRepository();
+    }
+
+    public ATM(AccountRepository repository) {
+        this.repository = repository;
     }
 
     // Se inserta una tarjeta al cajero
