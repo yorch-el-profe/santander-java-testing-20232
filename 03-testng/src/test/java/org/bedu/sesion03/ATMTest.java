@@ -69,4 +69,24 @@ public class ATMTest {
         // El código a probar
         Assert.assertThrows(InsufficientBalanceException.class, () -> atm.withdraw(600));
     }
+
+    @Test(description = "ATM should withdraw money")
+    public void sufficientBalance() throws UnexistingAccountException, InsufficientBalanceException {
+        // Precondición:
+        Card card = new Card("0000", 676784);
+        Account account = new Account(676784, 500);
+
+        List<Account> data = new LinkedList<>();
+        data.add(account);
+        AccountRepository customRepository = new AccountRepository(data);
+
+        atm = new ATM(customRepository);
+        atm.insertCard(card);
+        atm.loadAccount();
+
+        // El código a probar
+        atm.withdraw(100);
+
+        Assert.assertEquals(account.getAmount(), 400);
+    }
 }
