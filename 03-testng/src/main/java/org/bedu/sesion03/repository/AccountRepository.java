@@ -12,6 +12,10 @@ public class AccountRepository {
         data = new LinkedList<>();
     }
 
+    public AccountRepository(List<Account> data) {
+        this.data = data;
+    }
+
     public Optional<Account> findById(long id) {
         for (Account account : data) {
             if (account.getId() == id) {
