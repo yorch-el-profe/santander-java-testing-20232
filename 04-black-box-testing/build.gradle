@@ -27,4 +27,5 @@ cucumber {
 dependencies {
   testImplementation 'org.testng:testng:7.9.0'
   testImplementation 'io.cucumber:cucumber-java:7.12.1'
+  testImplementation 'io.cucumber:cucumber-picocontainer:7.15.0'
 }
