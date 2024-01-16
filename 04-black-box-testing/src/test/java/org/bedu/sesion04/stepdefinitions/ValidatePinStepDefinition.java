@@ -40,4 +40,9 @@ public class ValidatePinStepDefinition {
     public void give_access_to_user() {
         Assert.assertTrue(atm.validatePin(pin));
     }
+
+    @Then("the ATM should deny the access to the user")
+    public void deny_access_to_user() {
+        Assert.assertFalse(atm.validatePin(pin));
+    }
 }
