@@ -1,7 +1,6 @@
 package org.bedu.sesion04.repository;
 
 import org.bedu.sesion04.model.Account;
-import org.bedu.sesion04.repository.AccountRepository;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
