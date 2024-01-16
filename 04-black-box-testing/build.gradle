@@ -1,0 +1,30 @@
+plugins {
+    id 'application'
+    id "io.freefair.lombok" version "8.4"
+    id "se.thinkcode.cucumber-runner" version "0.0.11"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17;
+}
+
+group 'org.bedu.sesion04'
+
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useTestNG()
+}
+
+cucumber {
+    main = "io.cucumber.core.cli.Main"
+    glue = "classpath:org.bedu.sesion04.stepdefinitions"
+}
+
+dependencies {
+  testImplementation 'org.testng:testng:7.9.0'
+  testImplementation 'io.cucumber:cucumber-java:7.12.1'
+}
