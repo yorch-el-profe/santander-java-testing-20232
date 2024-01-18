@@ -7,6 +7,10 @@ public class WeatherAPI {
 
     private Axios axios;
 
+    public WeatherAPI(Axios axios) {
+        this.axios = axios;
+    }
+
     public WeatherAPI() {
         axios = new Axios();
     }
