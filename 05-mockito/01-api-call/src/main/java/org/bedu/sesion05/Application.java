@@ -2,6 +2,8 @@ package org.bedu.sesion05;
 
 import java.util.Scanner;
 
+import org.bedu.sesion05.model.Temperature;
+
 public class Application {
     public static void main(String... args) {
         Scanner scanner = new Scanner(System.in);
@@ -15,9 +17,9 @@ public class Application {
         double longitude = scanner.nextDouble();
         scanner.nextLine();
 
-        double temperature = api.getCurrentWeather(latitude, longitude);
+        Temperature result = api.getCurrentWeather(latitude, longitude);
 
-        System.out.println("La temperatura es: " + temperature + "°C");
+        System.out.println("La temperatura es: " + result.getTemperature() + "°C");
         scanner.close();
     }
 }

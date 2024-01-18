@@ -1,6 +1,7 @@
 package org.bedu.sesion05;
 
 import org.bedu.sesion05.model.CurrentWeather;
+import org.bedu.sesion05.model.Temperature;
 import org.bedu.sesion05.model.Weather;
 import org.bedu.sesion05.util.Axios;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -17,6 +19,8 @@ public class WeatherAPITest {
 
     private WeatherAPI weatherAPI;
     private Axios axiosMock;
+    private final double LATITUDE = 33.87987597483;
+    private final double LONGITUDE = -29.458974545;
 
     @BeforeEach
     public void setup() {
@@ -33,8 +37,6 @@ public class WeatherAPITest {
     public void apiTemperature() throws Exception {
         // [ARRANGE] ----------------------------------------------
         final double TEMPERATURE = 32;
-        final double LATITUDE = 33.87987597483;
-        final double LONGITUDE = -29.458974545;
 
         // Creando mi objeto de respuesta para la simulación
         Weather weather = new Weather();
@@ -51,24 +53,22 @@ public class WeatherAPITest {
         when(axiosMock.request(anyString(), any())).thenReturn(weather);
 
         // [ACT] ----------------------------------------------
-        double temperature = weatherAPI.getCurrentWeather(LATITUDE, LONGITUDE);
+        Temperature result = weatherAPI.getCurrentWeather(LATITUDE, LONGITUDE);
 
         // [ASSERT] ----------------------------------------------
-        assertEquals(TEMPERATURE, temperature);
+        assertEquals(TEMPERATURE, result.getTemperature());
     }
 
     @Test
     @DisplayName("WeatherAPI should return -1 if there's any exception")
     public void apiError() throws Exception {
         // [ARRANGE] ----------------------------------------------
-        final double LATITUDE = 33.87987597483;
-        final double LONGITUDE = -29.458974545;
         when(axiosMock.request(anyString(), any())).thenThrow(Exception.class);
 
         // [ACT] ----------------------------------------------
-        double temperature = weatherAPI.getCurrentWeather(LATITUDE, LONGITUDE);
+        Temperature result = weatherAPI.getCurrentWeather(LATITUDE, LONGITUDE);
 
         // [ASSERT] ----------------------------------------------
-        assertEquals(-1, temperature);
+        assertNull(result);
     }
 }
