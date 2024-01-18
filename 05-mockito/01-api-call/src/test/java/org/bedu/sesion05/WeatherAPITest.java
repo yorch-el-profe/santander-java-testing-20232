@@ -29,13 +29,17 @@ public class WeatherAPITest {
     }
 
     @Test
-    @DisplayName("WeatherAPI should return 10°C if API returns 10°C")
+    @DisplayName("WeatherAPI should return the same temperature as API")
     public void apiTemperature() throws Exception {
         // [ARRANGE] ----------------------------------------------
+        final double TEMPERATURE = 32;
+        final double LATITUDE = 33.87987597483;
+        final double LONGITUDE = -29.458974545;
+
         // Creando mi objeto de respuesta para la simulación
         Weather weather = new Weather();
         CurrentWeather currentWeather = new CurrentWeather();
-        currentWeather.setTemperature(10);
+        currentWeather.setTemperature(TEMPERATURE);
         weather.setCurrent_weather(currentWeather);
 
         // Simular que el API regresa un objeto
@@ -47,9 +51,24 @@ public class WeatherAPITest {
         when(axiosMock.request(anyString(), any())).thenReturn(weather);
 
         // [ACT] ----------------------------------------------
-        double temperature = weatherAPI.getCurrentWeather(0, 0);
+        double temperature = weatherAPI.getCurrentWeather(LATITUDE, LONGITUDE);
 
         // [ASSERT] ----------------------------------------------
-        assertEquals(10, temperature);
+        assertEquals(TEMPERATURE, temperature);
+    }
+
+    @Test
+    @DisplayName("WeatherAPI should return -1 if there's any exception")
+    public void apiError() throws Exception {
+        // [ARRANGE] ----------------------------------------------
+        final double LATITUDE = 33.87987597483;
+        final double LONGITUDE = -29.458974545;
+        when(axiosMock.request(anyString(), any())).thenThrow(Exception.class);
+
+        // [ACT] ----------------------------------------------
+        double temperature = weatherAPI.getCurrentWeather(LATITUDE, LONGITUDE);
+
+        // [ASSERT] ----------------------------------------------
+        assertEquals(-1, temperature);
     }
 }
