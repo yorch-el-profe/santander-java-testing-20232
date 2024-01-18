@@ -1,0 +1,33 @@
+plugins {
+    id 'application'
+    id "io.freefair.lombok" version "8.4"
+}
+
+application {
+    mainClass = "org.bedu.sesion05.Application"
+}
+
+run {
+  standardInput = System.in
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17;
+}
+
+group 'org.bedu.sesion05'
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation 'org.xerial:sqlite-jdbc:3.44.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.mockito:mockito-core:5.9.0'
+}
