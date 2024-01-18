@@ -1,0 +1,32 @@
+plugins {
+    id 'application'
+    id "io.freefair.lombok" version "8.4"
+}
+
+application {
+    mainClass = "org.bedu.sesion05.Application"
+}
+
+run {
+  standardInput = System.in
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17;
+}
+
+group 'org.bedu.sesion05'
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
