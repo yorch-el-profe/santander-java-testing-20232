@@ -2,6 +2,7 @@ package org.bedu.sesion05;
 
 import org.bedu.sesion05.model.CurrentWeather;
 import org.bedu.sesion05.model.Temperature;
+import org.bedu.sesion05.model.ThermalSensation;
 import org.bedu.sesion05.model.Weather;
 import org.bedu.sesion05.util.Axios;
 import org.junit.jupiter.api.BeforeEach;
@@ -70,5 +71,65 @@ public class WeatherAPITest {
 
         // [ASSERT] ----------------------------------------------
         assertNull(result);
+    }
+
+    @Test
+    @DisplayName("Thermal sensation should be COLD if the temperature is below 12")
+    public void coldTemperature() throws Exception {
+        // [ARRANGE] ----------------------------------------------
+        final double TEMPERATURE = 11;
+
+        Weather weather = new Weather();
+        CurrentWeather currentWeather = new CurrentWeather();
+        currentWeather.setTemperature(TEMPERATURE);
+        weather.setCurrent_weather(currentWeather);
+
+        when(axiosMock.request(anyString(), any())).thenReturn(weather);
+
+        // [ACT] ----------------------------------------------
+        Temperature result = weatherAPI.getCurrentWeather(LATITUDE, LONGITUDE);
+
+        // [ASSERT] ----------------------------------------------
+        assertEquals(ThermalSensation.COLD, result.getSensation());
+    }
+
+    @Test
+    @DisplayName("Thermal sensation should be WARM if the temperature is below 12")
+    public void warmTemperature() throws Exception {
+        // [ARRANGE] ----------------------------------------------
+        final double TEMPERATURE = 20;
+
+        Weather weather = new Weather();
+        CurrentWeather currentWeather = new CurrentWeather();
+        currentWeather.setTemperature(TEMPERATURE);
+        weather.setCurrent_weather(currentWeather);
+
+        when(axiosMock.request(anyString(), any())).thenReturn(weather);
+
+        // [ACT] ----------------------------------------------
+        Temperature result = weatherAPI.getCurrentWeather(LATITUDE, LONGITUDE);
+
+        // [ASSERT] ----------------------------------------------
+        assertEquals(ThermalSensation.WARM, result.getSensation());
+    }
+
+    @Test
+    @DisplayName("Thermal sensation should be HOT if the temperature is below 12")
+    public void hotTemperature() throws Exception {
+        // [ARRANGE] ----------------------------------------------
+        final double TEMPERATURE = 30;
+
+        Weather weather = new Weather();
+        CurrentWeather currentWeather = new CurrentWeather();
+        currentWeather.setTemperature(TEMPERATURE);
+        weather.setCurrent_weather(currentWeather);
+
+        when(axiosMock.request(anyString(), any())).thenReturn(weather);
+
+        // [ACT] ----------------------------------------------
+        Temperature result = weatherAPI.getCurrentWeather(LATITUDE, LONGITUDE);
+
+        // [ASSERT] ----------------------------------------------
+        assertEquals(ThermalSensation.HOT, result.getSensation());
     }
 }
