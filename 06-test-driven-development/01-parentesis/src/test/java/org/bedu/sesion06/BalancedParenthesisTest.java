@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class BalancedParenthesisTest {
   
@@ -81,16 +83,11 @@ public class BalancedParenthesisTest {
     assertTrue(result);
   }
 
-  @Test
+  @ParameterizedTest
+  @ValueSource(strings = {"))))", ")))))))", "(((("})
   @DisplayName("Weird sequence )))) should be invalid")
-  public void weirdSequence() {
-    String sequence = "))))";
-    String sequence2 = "((((";
-
+  public void weirdSequence(String sequence) {
     boolean result = BalancedParenthesis.isBalanced(sequence);
-    boolean result2 = BalancedParenthesis.isBalanced(sequence2);
-
     assertFalse(result);
-    assertFalse(result2);
   }
 }
